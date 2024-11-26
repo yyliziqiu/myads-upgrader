@@ -28,10 +28,8 @@ func Boot() {
 
 func upgrade() {
 	var (
-		exeFile = "sender.exe"
-		tmpFile = "sender.tmp"
-		exePath = BasePath(exeFile)
-		tmpPath = BasePath(tmpFile)
+		exePath = BasePath("sender.exe")
+		tmpPath = BasePath("sender.tmp")
 	)
 
 	ok, err := zfile.Exist(tmpPath)
@@ -49,7 +47,7 @@ func upgrade() {
 		zlog.Warnf("Excute stop failed, path: %s, error: %v,", exePath, err)
 		return
 	}
-	time.Sleep(3 * time.Second)
+	time.Sleep(2 * time.Second)
 
 	if ok2, _ := zfile.Exist(exePath); ok2 {
 		if err = os.Remove(exePath); err != nil {
@@ -58,7 +56,7 @@ func upgrade() {
 		}
 	}
 
-	err = os.Rename(tmpPath, exeFile)
+	err = os.Rename(tmpPath, exePath)
 	if err != nil {
 		zlog.Warnf("Rename file failed, path: %s, error: %v,", tmpPath, err)
 		return
