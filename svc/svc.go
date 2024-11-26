@@ -10,6 +10,10 @@ import (
 	"github.com/yyliziqiu/zlib/zlog"
 )
 
+func BasePath(path string) string {
+	return filepath.Join("C:\\Users\\Administrator\\Myads", path)
+}
+
 func Boot() {
 	zlog.Info("Boot upgrader.")
 
@@ -26,8 +30,8 @@ func upgrade() {
 	var (
 		exeFile = "sender.exe"
 		tmpFile = "sender.tmp"
-		exePath = basePath(exeFile)
-		tmpPath = basePath(tmpFile)
+		exePath = BasePath(exeFile)
+		tmpPath = BasePath(tmpFile)
 	)
 
 	ok, err := zfile.Exist(tmpPath)
@@ -40,7 +44,7 @@ func upgrade() {
 		return
 	}
 
-	err = execCmd(exePath, "stop")
+	err = ExecCmd(exePath, "stop")
 	if err != nil {
 		zlog.Warnf("Excute stop failed, path: %s, error: %v,", exePath, err)
 		return
@@ -60,18 +64,14 @@ func upgrade() {
 		return
 	}
 
-	err = execCmd(exePath, "start")
+	err = ExecCmd(exePath, "start")
 	if err != nil {
 		zlog.Warnf("Excute start failed, path: %s, error: %v,", exePath, err)
 		return
 	}
 }
 
-func basePath(path string) string {
-	return filepath.Join("C:\\Users\\Administrator\\Myads", path)
-}
-
-func execCmd(cmd string, action string) error {
+func ExecCmd(cmd string, action string) error {
 	c := exec.Command("cmd", "/c", cmd, action)
 	c.Stdout = nil
 	return c.Run()

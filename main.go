@@ -8,7 +8,6 @@ import (
 	"github.com/kardianos/service"
 	"github.com/yyliziqiu/zlib/zlog"
 
-	"myads-upgrater/conf"
 	"myads-upgrater/svc"
 )
 
@@ -20,7 +19,7 @@ func main() {
 func setLogger() {
 	config := zlog.Config{
 		// Console: true,
-		Path: conf.BasePath("logs"),
+		Path: svc.BasePath("logs"),
 		Name: "upgrader",
 	}
 
