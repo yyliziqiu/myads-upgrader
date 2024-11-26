@@ -19,9 +19,9 @@ func main() {
 
 func setLogger() {
 	config := zlog.Config{
-		Console: true,
-		Path:    conf.BasePath("logs"),
-		Name:    "upgrader",
+		// Console: true,
+		Path: conf.BasePath("logs"),
+		Name: "upgrader",
 	}
 
 	err := zlog.Init(config)

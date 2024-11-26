@@ -12,6 +12,8 @@ import (
 )
 
 func Boot() {
+	zlog.Info("Boot upgrader.")
+
 	ticker := time.NewTicker(time.Second)
 	for {
 		t := <-ticker.C
@@ -35,7 +37,7 @@ func upgrade() {
 		return
 	}
 	if !ok {
-		zlog.Debug("No upgrade file")
+		// zlog.Debug("No upgrade file")
 		return
 	}
 
