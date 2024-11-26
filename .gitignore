@@ -1,0 +1,9 @@
+.idea
+.DS_Store
+
+/bin/
+/logs/
+/data/
+
+/application*.yml
+/upgrader.exe
