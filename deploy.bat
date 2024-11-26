@@ -10,8 +10,18 @@ cd %dirPath%
 
 git pull origin master
 
+echo.
+echo Golang build.
 go build -o upgrader.exe main.go
 
+echo.
+echo Upload binary.
 curl -F "file=@%binPath%" %uploadUrl%
+echo.
+
+echo.
+echo Completed, please quit.
+
+timeout /t 10 /nobreak >nul
 
 endlocal
