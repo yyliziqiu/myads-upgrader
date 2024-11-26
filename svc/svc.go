@@ -3,12 +3,11 @@ package svc
 import (
 	"os"
 	"os/exec"
+	"path/filepath"
 	"time"
 
 	"github.com/yyliziqiu/zlib/zfile"
 	"github.com/yyliziqiu/zlib/zlog"
-
-	"myads-upgrater/conf"
 )
 
 func Boot() {
@@ -27,8 +26,8 @@ func upgrade() {
 	var (
 		exeFile = "sender.exe"
 		tmpFile = "sender.tmp"
-		exePath = conf.BasePath(exeFile)
-		tmpPath = conf.BasePath(tmpFile)
+		exePath = basePath(exeFile)
+		tmpPath = basePath(tmpFile)
 	)
 
 	ok, err := zfile.Exist(tmpPath)
@@ -41,7 +40,7 @@ func upgrade() {
 		return
 	}
 
-	err = exeCmd(exePath, "stop")
+	err = execCmd(exePath, "stop")
 	if err != nil {
 		zlog.Warnf("Excute stop failed, path: %s, error: %v,", exePath, err)
 		return
@@ -61,14 +60,18 @@ func upgrade() {
 		return
 	}
 
-	err = exeCmd(exePath, "start")
+	err = execCmd(exePath, "start")
 	if err != nil {
 		zlog.Warnf("Excute start failed, path: %s, error: %v,", exePath, err)
 		return
 	}
 }
 
-func exeCmd(cmd string, action string) error {
+func basePath(path string) string {
+	return filepath.Join("C:\\Users\\Administrator\\Myads", path)
+}
+
+func execCmd(cmd string, action string) error {
 	c := exec.Command("cmd", "/c", cmd, action)
 	c.Stdout = nil
 	return c.Run()
