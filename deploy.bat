@@ -4,7 +4,7 @@ setlocal
 
 set dirPath=C:\Users\Administrator\gocode\myads-upgrader
 set binPath=%dirPath%\upgrader.exe
-set uploadUrl=http://mkt.nextotp.com/admin/modules/myads/upgrader/binary
+set uploadUrl=http://mkt.nextotp.com/admin/modules/myads/api/upgrader/binary
 
 cd %dirPath%
 
